@@ -8,7 +8,17 @@ import Home from '@/views/Home'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
 import Search from '@/views/Search'
+// 备份原本的push方法
+// let origonPush = VueRouter.prototype.push
+// // 重写push、replace方法
+// VueRouter.prototype.push = function(location, resolve, reject){
+//     if(resolve && reject){
+//         origonPush.call(this, location, resolve, reject)
+//     }else{
+//         origonPush.call(this, () => {},() => {})
+//     }
 
+// }
 // 新建并暴露路由器
 export default new VueRouter({
     // 配置路由
@@ -35,10 +45,15 @@ export default new VueRouter({
             }
         },
         {
-            path:'/search',
+            path:'/search/:keyword?',
             component:Search,
             meta:{
                 showFooter:true
+            },
+            name:'search',
+            // 可将parmas参数和query参数作为props传入组件
+            props($route){
+                return {k:$route.query.k, keyword:$route.params.keyword}
             }
         },
         // 重定向

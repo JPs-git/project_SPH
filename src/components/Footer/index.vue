@@ -48,7 +48,7 @@
               <a href="" id='chakan'>查看详情</a>
           </div>
       </div>
-      <div footer-down>
+      <div class="footer-down" >
           <a href="">关于我们</a>
           <span> | </span>
           <a href="">联系我们</a>
@@ -90,16 +90,32 @@ export default {
 </script>
 
 <style scoped>
+    .footer-root{
+        background-color: rgb(234 234 234);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        
+    }
     .footer-up{
         height: 160px;
         overflow: hidden;
+        border-bottom: 1px black solid;
+        margin-bottom: 10px;
     }
     .footer-list{
         float: left;
         width: 198px;
     }
+    .footer-list h5{
+        height: 25px;
+        font-weight: bolder;
+    }
     .footer-list a{
-        display: block
+        display: block;
+        height: 20px;
+        font-size: 13px;
     }
     #chakan{
         float: right;
