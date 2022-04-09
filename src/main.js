@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 // 清除默认样式
-import '@/assets/style/reset.css'
+import '@/assets/style/css/reset.css'
 // 引入路由
 import router from '@/router'
 // 引入并全局注册三级联动组件

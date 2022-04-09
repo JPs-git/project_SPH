@@ -1,123 +1,173 @@
 <template>
-  <div class="footer-root">
-      <div class="footer-up">
-          <div class="footer-list">
-              <h5>购物指南</h5>
-              <a href="">购物流程</a>
-              <a href="">会员介绍</a>
-              <a href="">生活旅行</a>
-              <a href="">常见问题</a>
-              <a href="">大家电</a>
-              <a href="">联系客服</a>
-          </div>
-          <div class="footer-list">
-              <h5>配送方式</h5>
-              <a href="">上门自提</a>
-              <a href="">211限时达</a>
-              <a href="">配送服务查询</a>
-              <a href="">配送费收取标准</a>
-              <a href="">海外配送</a>
-          </div>
-          <div class="footer-list">
-              <h5>支付方式</h5>
-              <a href="">货到付款</a>
-              <a href="">在线支付</a>
-              <a href="">分期付款</a>
-              <a href="">公司转账</a>
-          </div>
-          <div class="footer-list">
-              <h5>售后服务</h5>
-              <a href="">售后政策</a>
-              <a href="">价格保护</a>
-              <a href="">退款说明</a>
-              <a href="">返修/退换货</a>
-              <a href="">取消订单</a>
-          </div>
-          <div class="footer-list">
-              <h5>特色服务</h5>
-              <a href="">夺宝岛</a>
-              <a href="">DIY装机</a>
-              <a href="">延保服务</a>
-              <a href="">京东E卡</a>
-              <a href="">京东通信</a>
-              <a href="">京鱼座智能</a>
-          </div>
-          <div class="footer-list">
-              <h5>京东自营覆盖区县</h5>
-              <p>京东已向全国2661个区县提供自营配送服务，支持货到付款、POS机刷卡和售后上门服务。</p>
-              <a href="" id='chakan'>查看详情</a>
-          </div>
+  <div class="footer">
+    <div class="footer-container">
+      <div class="footerList">
+        <div class="footerItem">
+          <h4>购物指南</h4>
+          <ul class="footerItemCon">
+            <li>购物流程</li>
+            <li>会员介绍</li>
+            <li>生活旅行/团购</li>
+            <li>常见问题</li>
+            <li>购物指南</li>
+          </ul>
+        </div>
+        <div class="footerItem">
+          <h4>配送方式</h4>
+          <ul class="footerItemCon">
+            <li>上门自提</li>
+            <li>211限时达</li>
+            <li>配送服务查询</li>
+            <li>配送费收取标准</li>
+            <li>海外配送</li>
+          </ul>
+        </div>
+        <div class="footerItem">
+          <h4>支付方式</h4>
+          <ul class="footerItemCon">
+            <li>货到付款</li>
+            <li>在线支付</li>
+            <li>分期付款</li>
+            <li>邮局汇款</li>
+            <li>公司转账</li>
+          </ul>
+        </div>
+        <div class="footerItem">
+          <h4>售后服务</h4>
+          <ul class="footerItemCon">
+            <li>售后政策</li>
+            <li>价格保护</li>
+            <li>退款说明</li>
+            <li>返修/退换货</li>
+            <li>取消订单</li>
+          </ul>
+        </div>
+        <div class="footerItem">
+          <h4>特色服务</h4>
+          <ul class="footerItemCon">
+            <li>夺宝岛</li>
+            <li>DIY装机</li>
+            <li>延保服务</li>
+            <li>尚品汇E卡</li>
+            <li>尚品汇通信</li>
+          </ul>
+        </div>
+        <div class="footerItem">
+          <h4>帮助中心</h4>
+          <img src="./images/wx_cz.jpg" />
+        </div>
       </div>
-      <div class="footer-down" >
-          <a href="">关于我们</a>
-          <span> | </span>
-          <a href="">联系我们</a>
-          <span> | </span>
-          <a href="">联系客服</a>
-          <span> | </span>
-          <a href="">合作招商</a>
-          <span> | </span>
-          <a href="">商家帮助</a>
-          <span> | </span>
-          <a href="">营销中心</a>
-          <span> | </span>
-          <a href="">手机京东</a>
-          <span> | </span>
-          <a href="">友情链接</a>
-          <span> | </span>
-          <a href="">销售联盟</a>
-          <span> | </span>
-          <a href="">京东社区</a>
-          <span> | </span>
-          <a href="">风险监测</a>
-          <span> | </span>
-          <a href="">隐私政策</a>
-          <span> | </span>
-          <a href="">京东公益</a>
-          <span> | </span>
-          <a href="">English Site</a>
-          <span> | </span>
-          <a href="">Media & IR</a>
+      <div class="copyright">
+        <ul class="helpLink">
+          <li>
+            关于我们
+            <span class="space"></span>
+          </li>
+          <li>
+            联系我们
+            <span class="space"></span>
+          </li>
+          <li>
+            关于我们
+            <span class="space"></span>
+          </li>
+          <li>
+            商家入驻
+            <span class="space"></span>
+          </li>
+          <li>
+            营销中心
+            <span class="space"></span>
+          </li>
+          <li>
+            友情链接
+            <span class="space"></span>
+          </li>
+          <li>
+            关于我们
+            <span class="space"></span>
+          </li>
+          <li>
+            营销中心
+            <span class="space"></span>
+          </li>
+          <li>
+            友情链接
+            <span class="space"></span>
+          </li>
+          <li>关于我们</li>
+        </ul>
+        <p>地址：北京市昌平区宏福科技园综合楼6层</p>
+        <p>京ICP备19006430号</p>
       </div>
-
+    </div>
   </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
-<style scoped>
-    .footer-root{
-        background-color: rgb(234 234 234);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-        
-    }
-    .footer-up{
-        height: 160px;
-        overflow: hidden;
-        border-bottom: 1px black solid;
-        margin-bottom: 10px;
-    }
-    .footer-list{
+<style lang="less" scoped>
+.footer {
+  background-color: #eaeaea;
+
+  .footer-container {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+
+    .footerList {
+      padding: 20px;
+      border-bottom: 1px solid #e4e1e1;
+      border-top: 1px solid #e4e1e1;
+      overflow: hidden;
+      padding-left: 40px;
+
+      .footerItem {
+        width: 16.6666667%;
         float: left;
-        width: 198px;
+
+        h4 {
+          font-size: 14px;
+        }
+
+        .footerItemCon {
+          li {
+            line-height: 18px;
+          }
+        }
+
+        &:last-child img {
+          width: 121px;
+        }
+      }
     }
-    .footer-list h5{
-        height: 25px;
-        font-weight: bolder;
+
+    .copyright {
+      padding: 20px;
+
+      .helpLink {
+        text-align: center;
+
+        li {
+          display: inline;
+
+          .space {
+            border-left: 1px solid #666;
+            width: 1px;
+            height: 13px;
+            background: #666;
+            margin: 8px 10px;
+          }
+        }
+      }
+
+      p {
+        margin: 10px 0;
+        text-align: center;
+      }
     }
-    .footer-list a{
-        display: block;
-        height: 20px;
-        font-size: 13px;
-    }
-    #chakan{
-        float: right;
-    }
+  }
+}
 </style>
