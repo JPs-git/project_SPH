@@ -26,8 +26,6 @@ export default {
 
 <style>
 .home-root {
-  overflow: hidden;
-  margin: 20px 0;
-  font-size: 50px;
+ 
 }
 </style>
