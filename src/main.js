@@ -4,7 +4,10 @@ import App from './App.vue'
 import '@/assets/style/reset.css'
 // 引入路由
 import router from '@/router'
-
+// 引入并全局注册三级联动组件
+import TypeNav from '@/views/Home/TypeNav'
+Vue.component(TypeNav.name, TypeNav)
+// 关闭生产提示
 Vue.config.productionTip = false
 
 new Vue({

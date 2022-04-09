@@ -36,7 +36,7 @@ export default new VueRouter({
             component:Home,
             meta:{
                 showFooter:true
-            }
+            },
         },
         {
             path:'/login',
