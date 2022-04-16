@@ -1692,8 +1692,16 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
+
 export default {
   name: "TypeNav",
+  methods:{
+    
+  },
+  computed:{
+    ...mapState([])
+  }
 };
 </script>
 
