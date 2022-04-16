@@ -14,7 +14,14 @@
       </nav>
       <div class="sort">
         <div class="all-sort-list2">
-          <div class="item" v-for="c1 in newCategoryList" :key="c1.categoryId">
+          <div 
+            class="item" 
+            v-for="(c1, index) in newCategoryList" 
+            :key="c1.categoryId" 
+            @mouseenter="changeIndex(index)"
+            @mouseleave="resetIndex"
+            :class="{cur:index == currentIndex}"
+          >
             <h3>
               <a href="">{{c1.categoryName}}</a>
             </h3>
@@ -45,8 +52,20 @@ import {mapState, mapGetters} from 'vuex'
 
 export default {
   name: "TypeNav",
+  data(){
+      return{
+          currentIndex:-1
+      }
+  },
   methods:{
-    
+    // 鼠标移入修改currentIndex的数据
+    changeIndex(index){
+      this.currentIndex = index
+    },
+    resetIndex(){
+      // 恢复初值代表鼠标移出
+      this.currentIndex = -1
+    }
   },
   computed:{
     ...mapState({categoryList:state=>state.home.categoryList}),
@@ -169,10 +188,16 @@ export default {
             }
           }
 
-          &:hover {
-            .item-list {
-              display: block;
-            }
+          // &:hover {
+          //   .item-list {
+          //     display: block;
+          //   }
+          // }
+        }
+        .cur{
+          background-color: skyblue;
+          .item-list{
+            display: block;
           }
         }
       }
