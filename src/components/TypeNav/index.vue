@@ -14,19 +14,23 @@
       </nav>
       <div class="sort">
         <div class="all-sort-list2">
-          <div 
-            class="item" 
-            v-for="(c1, index) in newCategoryList" 
-            :key="c1.categoryId" 
+          <div
+            class="item"
+            v-for="(c1, index) in newCategoryList"
+            :key="c1.categoryId"
             @mouseenter="changeIndex(index)"
             @mouseleave="resetIndex"
-            :class="{cur:index == currentIndex}"
+            :class="{ cur: index == currentIndex }"
           >
             <h3>
-              <a href="">{{c1.categoryName}}</a>
+              <a href="">{{ c1.categoryName }}</a>
             </h3>
             <div class="item-list clearfix">
-              <div class="subitem" v-for="c2 in c1.categoryChild" :key="c2.categoryId">
+              <div
+                class="subitem"
+                v-for="c2 in c1.categoryChild"
+                :key="c2.categoryId"
+              >
                 <dl class="fore">
                   <dt>
                     <a href="">{{ c2.categoryName }}</a>
@@ -40,7 +44,6 @@
               </div>
             </div>
           </div>
-          
         </div>
       </div>
     </div>
@@ -48,33 +51,35 @@
 </template>
 
 <script>
-import {mapState, mapGetters} from 'vuex'
+import { mapState, mapGetters } from "vuex";
+import throttle from "lodash/throttle";
 
 export default {
   name: "TypeNav",
-  data(){
-      return{
-          currentIndex:-1
-      }
+  data() {
+    return {
+      currentIndex: -1,
+    };
   },
-  methods:{
-    // 鼠标移入修改currentIndex的数据
-    changeIndex(index){
-      this.currentIndex = index
-    },
-    resetIndex(){
+  methods: {
+    // 鼠标移入修改currentIndex的数据, 并加入节流
+    // thtrottle注意不要用箭头函数，以免产生上下文错误
+    changeIndex: throttle(function (index) {
+      this.currentIndex = index;
+    }, 50),
+    resetIndex() {
       // 恢复初值代表鼠标移出
-      this.currentIndex = -1
-    }
+      this.currentIndex = -1;
+    },
   },
-  computed:{
-    ...mapState({categoryList:state=>state.home.categoryList}),
-    ...mapGetters({newCategoryList:"newCategoryList"})
+  computed: {
+    ...mapState({ categoryList: (state) => state.home.categoryList }),
+    ...mapGetters({ newCategoryList: "newCategoryList" }),
   },
-  mounted(){
+  mounted() {
     // 通知vuex发请求，获取数据，存储在state中
-    this.$store.dispatch('categoryList')
-  }
+    this.$store.dispatch("categoryList");
+  },
 };
 </script>
 
@@ -194,9 +199,9 @@ export default {
           //   }
           // }
         }
-        .cur{
+        .cur {
           background-color: skyblue;
-          .item-list{
+          .item-list {
             display: block;
           }
         }
