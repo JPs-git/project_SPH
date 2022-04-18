@@ -18,7 +18,7 @@ const requests = axios.create({
 })
 // 请求拦截器，发请求前的钩子
 requests.interceptors.request.use((config) => {
-    nprogress.start()
+    nprogress.start()   // 加载动画开始
     // 配置对象，其中headers请求头属性很重要
     return config
 })
@@ -26,7 +26,7 @@ requests.interceptors.request.use((config) => {
 // 响应拦截器
 requests.interceptors.response.use((res) => {
     // 成功的响应
-    nprogress.done()
+    nprogress.done()    // 加载动画结束
     return res.data
 },(err) => {
     // 失败的响应

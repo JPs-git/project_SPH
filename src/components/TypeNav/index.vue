@@ -13,6 +13,7 @@
         <a href="###">秒杀</a>
       </nav>
       <div class="sort">
+        <!-- 利用事件的委派为子节点绑定跳转搜索事件 -->
         <div class="all-sort-list2" @click="goSearch">
           <div
             class="item"
@@ -22,9 +23,11 @@
             @mouseleave="resetIndex"
             :class="{ cur: index == currentIndex }"
           >
-          <!-- 一级菜单 -->
+            <!-- 一级菜单 -->
             <h3>
-              <a href="javascript:;">{{ c1.categoryName }}</a>
+              <a href="javascript:;" :data-category1Id="c1.categoryId">{{
+                c1.categoryName
+              }}</a>
             </h3>
             <div class="item-list clearfix">
               <!-- 二级菜单 -->
@@ -35,12 +38,16 @@
               >
                 <dl class="fore">
                   <dt>
-                    <a href="javascript:;">{{ c2.categoryName }}</a>
+                    <a href="javascript:;" :data-category2Id="c2.categoryId">{{
+                      c2.categoryName
+                    }}</a>
                   </dt>
                   <dd>
                     <!-- 三级菜单 -->
                     <em v-for="c3 in c2.categoryChild" :key="c3.categoryId">
-                      <a href="javascript:;">{{ c3.categoryName }}</a>
+                      <a href="javascript:;" :data-category3Id="c3.categoryId">{{
+                        c3.categoryName
+                      }}</a>
                     </em>
                   </dd>
                 </dl>
@@ -76,14 +83,35 @@ export default {
       this.currentIndex = -1;
     },
     // 跳转到search组件
-    goSearch(e){
-      if(e.target.tagName == 'A'){
-        // 模板字符串拼路径
-        this.$router.push(`/search?k=${e.target.innerHTML}`)
+    goSearch(e) {
+      let element = e.target  // 触发事件的dom元素
+      let location = { name: "search" };
+      let value = element.innerHTML  // 标签的关键词
+      // 对dom的dataset进行解构, 注意解构出的属性名均为小写
+      let {category1id, category2id, category3id}=element.dataset
+ 
+      // 判断是否为a标签
+      if (element.tagName == "A") {
+        // 判断标签是一级、二级还是三级菜单
+        if(category1id){
+          // 一级菜单
+          location.query = {category1id}
+        }else 
+        if(category2id){
+          // 二级菜单
+          location.query = {category2id}
+        }else
+        if(category3id){
+          // 三级菜单
+          location.query = {category3id}
+        }
+        location.query.k = value
         // 配置对象形式
-        // this.$router.push({name:'search',query:{k:e.target.innerHTML}, params:{keyword:e.target.innerHTML}})
+        this.$router.push(location);
+        // 模板字符串拼路径
+        // this.$router.push(`/search?k=${e.target.innerHTML}`)
       }
-    }
+    },
   },
   computed: {
     ...mapState({ categoryList: (state) => state.home.categoryList }),
