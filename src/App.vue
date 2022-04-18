@@ -15,6 +15,10 @@ export default {
   name: 'App',
   components: {
     Header,Footer
+  },
+  mounted(){
+    // 派发action获取三级联动的数据,只执行一次
+    this.$store.dispatch("categoryList")
   }
 }
 </script>

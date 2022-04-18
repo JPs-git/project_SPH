@@ -130,8 +130,7 @@ export default {
     ...mapGetters({ newCategoryList: "newCategoryList" }),
   },
   mounted() {
-    // 通知vuex发请求，获取数据，存储在state中
-    this.$store.dispatch("categoryList")
+    
     // 除home组件，其余默认隐藏菜单内容
     if(this.$route.path != '/home'){
       this.show = false
