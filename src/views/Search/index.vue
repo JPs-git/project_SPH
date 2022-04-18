@@ -1,7 +1,6 @@
 <template>
   <div>
-      <p>{{ k }}</p>
-      <p>{{ keyword }}</p>
+    <TypeNav class="type-nav"/>
   </div>
 </template>
 
@@ -13,6 +12,6 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+  
 </style>

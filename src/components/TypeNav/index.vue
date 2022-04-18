@@ -1,7 +1,7 @@
 <template>
   <div class="type-nav">
-    <div class="container">
-      <h2 class="all">全部商品分类</h2>
+    <div class="container"  @mouseleave="leaveShow">
+      <h2 class="all" @mouseenter="enterShow">全部商品分类</h2>
       <nav class="nav">
         <a href="###">服装城</a>
         <a href="###">美妆馆</a>
@@ -12,50 +12,53 @@
         <a href="###">有趣</a>
         <a href="###">秒杀</a>
       </nav>
-      <div class="sort">
-        <!-- 利用事件的委派为子节点绑定跳转搜索事件 -->
-        <div class="all-sort-list2" @click="goSearch">
-          <div
-            class="item"
-            v-for="(c1, index) in newCategoryList"
-            :key="c1.categoryId"
-            @mouseenter="changeIndex(index)"
-            @mouseleave="resetIndex"
-            :class="{ cur: index == currentIndex }"
-          >
-            <!-- 一级菜单 -->
-            <h3>
-              <a href="javascript:;" :data-category1Id="c1.categoryId">{{
-                c1.categoryName
-              }}</a>
-            </h3>
-            <div class="item-list clearfix">
-              <!-- 二级菜单 -->
-              <div
-                class="subitem"
-                v-for="c2 in c1.categoryChild"
-                :key="c2.categoryId"
-              >
-                <dl class="fore">
-                  <dt>
-                    <a href="javascript:;" :data-category2Id="c2.categoryId">{{
-                      c2.categoryName
-                    }}</a>
-                  </dt>
-                  <dd>
-                    <!-- 三级菜单 -->
-                    <em v-for="c3 in c2.categoryChild" :key="c3.categoryId">
-                      <a href="javascript:;" :data-category3Id="c3.categoryId">{{
-                        c3.categoryName
+      <!-- 过渡动画 -->
+      <transition name="sort">
+        <!-- 通过show的值控制sort的显示与否 -->
+        <div class="sort" v-show="show">
+          <!-- 利用事件的委派为子节点绑定跳转搜索事件 -->
+          <div class="all-sort-list2" @click="goSearch">
+            <div
+              class="item"
+              v-for="(c1, index) in newCategoryList"
+              :key="c1.categoryId"
+              @mouseenter="changeIndex(index)"
+              :class="{ cur: index == currentIndex }"
+            >
+              <!-- 一级菜单 -->
+              <h3>
+                <a href="javascript:;" :data-category1Id="c1.categoryId">{{
+                  c1.categoryName
+                }}</a>
+              </h3>
+              <div class="item-list clearfix">
+                <!-- 二级菜单 -->
+                <div
+                  class="subitem"
+                  v-for="c2 in c1.categoryChild"
+                  :key="c2.categoryId"
+                >
+                  <dl class="fore">
+                    <dt>
+                      <a href="javascript:;" :data-category2Id="c2.categoryId">{{
+                        c2.categoryName
                       }}</a>
-                    </em>
-                  </dd>
-                </dl>
+                    </dt>
+                    <dd>
+                      <!-- 三级菜单 -->
+                      <em v-for="c3 in c2.categoryChild" :key="c3.categoryId">
+                        <a href="javascript:;" :data-category3Id="c3.categoryId">{{
+                          c3.categoryName
+                        }}</a>
+                      </em>
+                    </dd>
+                  </dl>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -69,6 +72,7 @@ export default {
   data() {
     return {
       currentIndex: -1,
+      show:true
     };
   },
   methods: {
@@ -77,10 +81,14 @@ export default {
     changeIndex: throttle(function (index) {
       this.currentIndex = index;
     }, 50),
-    // 重置当前索引值
-    resetIndex() {
-      // 恢复初值代表鼠标移出
-      this.currentIndex = -1;
+    // 鼠标移出事件
+    leaveShow() {
+      // 鼠标移出索引恢复初值
+      this.currentIndex = -1
+      // 判断非home组件则将show改为false
+      if(this.$route.path != '/home'){
+      this.show = false  
+      }
     },
     // 跳转到search组件
     goSearch(e) {
@@ -112,6 +120,10 @@ export default {
         // this.$router.push(`/search?k=${e.target.innerHTML}`)
       }
     },
+    // 鼠标移入，改变show的值
+    enterShow(){
+      this.show = true 
+    },
   },
   computed: {
     ...mapState({ categoryList: (state) => state.home.categoryList }),
@@ -119,7 +131,12 @@ export default {
   },
   mounted() {
     // 通知vuex发请求，获取数据，存储在state中
-    this.$store.dispatch("categoryList");
+    this.$store.dispatch("categoryList")
+    // 除home组件，其余默认隐藏菜单内容
+    if(this.$route.path != '/home'){
+      this.show = false
+    }
+    
   },
 };
 </script>
@@ -247,6 +264,18 @@ export default {
           }
         }
       }
+    }
+    // 过度动画的样式
+    // 进入状态
+    .sort-enter{
+      height: 0;
+    }
+    // 结束状态
+    .sort-enter-to{
+      height: 461px;
+    }
+    .sort-enter-active{
+      transition: all .5s linear;
     }
   }
 }
