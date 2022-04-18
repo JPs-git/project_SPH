@@ -13,7 +13,7 @@
         <a href="###">秒杀</a>
       </nav>
       <div class="sort">
-        <div class="all-sort-list2">
+        <div class="all-sort-list2" @click="goSearch">
           <div
             class="item"
             v-for="(c1, index) in newCategoryList"
@@ -22,10 +22,12 @@
             @mouseleave="resetIndex"
             :class="{ cur: index == currentIndex }"
           >
+          <!-- 一级菜单 -->
             <h3>
-              <a href="">{{ c1.categoryName }}</a>
+              <a href="javascript:;">{{ c1.categoryName }}</a>
             </h3>
             <div class="item-list clearfix">
+              <!-- 二级菜单 -->
               <div
                 class="subitem"
                 v-for="c2 in c1.categoryChild"
@@ -33,11 +35,12 @@
               >
                 <dl class="fore">
                   <dt>
-                    <a href="">{{ c2.categoryName }}</a>
+                    <a href="javascript:;">{{ c2.categoryName }}</a>
                   </dt>
                   <dd>
+                    <!-- 三级菜单 -->
                     <em v-for="c3 in c2.categoryChild" :key="c3.categoryId">
-                      <a href="">{{ c3.categoryName }}</a>
+                      <a href="javascript:;">{{ c3.categoryName }}</a>
                     </em>
                   </dd>
                 </dl>
@@ -67,10 +70,20 @@ export default {
     changeIndex: throttle(function (index) {
       this.currentIndex = index;
     }, 50),
+    // 重置当前索引值
     resetIndex() {
       // 恢复初值代表鼠标移出
       this.currentIndex = -1;
     },
+    // 跳转到search组件
+    goSearch(e){
+      if(e.target.tagName == 'A'){
+        // 模板字符串拼路径
+        this.$router.push(`/search?k=${e.target.innerHTML}`)
+        // 配置对象形式
+        // this.$router.push({name:'search',query:{k:e.target.innerHTML}, params:{keyword:e.target.innerHTML}})
+      }
+    }
   },
   computed: {
     ...mapState({ categoryList: (state) => state.home.categoryList }),

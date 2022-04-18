@@ -30,7 +30,8 @@ requests.interceptors.response.use((res) => {
     return res.data
 },(err) => {
     // 失败的响应
-    return Promise.reject(new Error('faile'))
+    // return Promise.reject(new Error('faile'))
+    return err
 })
 
 // 对外暴露
