@@ -62,11 +62,18 @@ export default {
   methods: {
     // 搜索按钮回调
     goSearch() {
-      this.$router.push({
+      // 路由跳转的配置对象
+      let location = {
         name: "search",
         params: { keyword: this.keyword || undefined },
-        query: { k: this.keyword.toUpperCase() },
-      });
+        }
+      if(this.$route.query){
+        location.query = this.$route.query        
+      }
+
+      this.$router.push(location)
+        
+  
     },
   },
 };

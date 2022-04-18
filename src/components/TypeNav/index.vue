@@ -114,6 +114,11 @@ export default {
           location.query = {category3id}
         }
         location.query.k = value
+
+        // 如果有parmars参数也要传递
+        if(this.$route.params){
+          location.params = this.$route.params
+        }
         // 配置对象形式
         this.$router.push(location);
         // 模板字符串拼路径
