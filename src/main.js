@@ -6,12 +6,20 @@ import '@/assets/style/css/reset.css'
 import router from '@/router'
 // 引入vuex
 import store from './store'
-// 引入并全局注册三级联动组件
-import TypeNav from '@/components/TypeNav'
+
+// 引入并注册全局组件
+
+import TypeNav from '@/components/TypeNav'  // 三级联动组件
+import Carousel from '@/components/Carousel' // 轮播图
 Vue.component(TypeNav.name, TypeNav)
+Vue.component(Carousel.name, Carousel)
 // 关闭生产提示
 Vue.config.productionTip = false
 
+// 引入mock数据
+import '@/mock/mockServer'
+// 引入swiper样式
+import 'swiper/css/swiper.css'
 
 
 new Vue({
