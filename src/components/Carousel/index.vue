@@ -29,6 +29,8 @@ export default {
         this.$nextTick(() => {
           var mySwiper = new Swiper(".swiper-container", {
             loop: true, // 循环模式选项
+            autoplay:true, // 自动播放
+            delay:3000,  // 自动切换的时间间隔
 
             // 如果需要分页器
             pagination: {

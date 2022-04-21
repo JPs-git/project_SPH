@@ -1,6 +1,6 @@
 <template>
   <div class="type-nav">
-    <div class="container"  @mouseleave="leaveShow">
+    <div class="container" @mouseleave="leaveShow">
       <h2 class="all" @mouseenter="enterShow">全部商品分类</h2>
       <nav class="nav">
         <a href="###">服装城</a>
@@ -40,16 +40,20 @@
                 >
                   <dl class="fore">
                     <dt>
-                      <a href="javascript:;" :data-category2Id="c2.categoryId">{{
-                        c2.categoryName
-                      }}</a>
+                      <a
+                        href="javascript:;"
+                        :data-category2Id="c2.categoryId"
+                        >{{ c2.categoryName }}</a
+                      >
                     </dt>
                     <dd>
                       <!-- 三级菜单 -->
                       <em v-for="c3 in c2.categoryChild" :key="c3.categoryId">
-                        <a href="javascript:;" :data-category3Id="c3.categoryId">{{
-                          c3.categoryName
-                        }}</a>
+                        <a
+                          href="javascript:;"
+                          :data-category3Id="c3.categoryId"
+                          >{{ c3.categoryName }}</a
+                        >
                       </em>
                     </dd>
                   </dl>
@@ -64,85 +68,80 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
-import throttle from "lodash/throttle";
+import { mapState, mapGetters } from 'vuex'
+import throttle from 'lodash/throttle'
 
 export default {
-  name: "TypeNav",
+  name: 'TypeNav',
   data() {
     return {
       currentIndex: -1,
-      show:true
-    };
+      show: true,
+    }
   },
   methods: {
     // 鼠标移入修改currentIndex的数据, 并加入节流
     // thtrottle注意不要用箭头函数，以免产生上下文错误
     changeIndex: throttle(function (index) {
-      this.currentIndex = index;
+      this.currentIndex = index
     }, 50),
     // 鼠标移出事件
     leaveShow() {
       // 鼠标移出索引恢复初值
       this.currentIndex = -1
       // 判断非home组件则将show改为false
-      if(this.$route.path != '/home'){
-      this.show = false  
+      if (this.$route.path != '/home') {
+        this.show = false
       }
     },
-    // 跳转到search组件
+    // 点击响应函数--跳转到search组件
     goSearch(e) {
-      let element = e.target  // 触发事件的dom元素
-      let location = { name: "search" };
-      let value = element.innerHTML  // 标签的关键词
+      let element = e.target // 触发事件的dom元素
+      let location = { name: 'search' }
+      let value = element.innerHTML // 标签的关键词
       // 对dom的dataset进行解构, 注意解构出的属性名均为小写
-      let {category1id, category2id, category3id}=element.dataset
- 
+      let { category1id, category2id, category3id } = element.dataset
+
       // 判断是否为a标签
-      if (element.tagName == "A") {
+      if (element.tagName == 'A') {
         // 判断标签是一级、二级还是三级菜单
-        if(category1id){
+        if (category1id) {
           // 一级菜单
-          location.query = {category1id}
-        }else 
-        if(category2id){
+          location.query = { category1id }
+        } else if (category2id) {
           // 二级菜单
-          location.query = {category2id}
-        }else
-        if(category3id){
+          location.query = { category2id }
+        } else if (category3id) {
           // 三级菜单
-          location.query = {category3id}
+          location.query = { category3id }
         }
         location.query.k = value
 
         // 如果有parmars参数也要传递
-        if(this.$route.params){
+        if (this.$route.params) {
           location.params = this.$route.params
         }
+
         // 配置对象形式
-        this.$router.push(location);
-        // 模板字符串拼路径
-        // this.$router.push(`/search?k=${e.target.innerHTML}`)
+        this.$router.push(location)
       }
     },
     // 鼠标移入，改变show的值
-    enterShow(){
-      this.show = true 
+    enterShow() {
+      this.show = true
     },
   },
   computed: {
     ...mapState({ categoryList: (state) => state.home.categoryList }),
-    ...mapGetters({ newCategoryList: "newCategoryList" }),
+    ...mapGetters({ newCategoryList: 'newCategoryList' }),
   },
   mounted() {
-    
     // 除home组件，其余默认隐藏菜单内容
-    if(this.$route.path != '/home'){
+    if (this.$route.path != '/home') {
       this.show = false
     }
-    
   },
-};
+}
 </script>
 
 <style lang="less" scoped>
@@ -271,15 +270,15 @@ export default {
     }
     // 过度动画的样式
     // 进入状态
-    .sort-enter{
+    .sort-enter {
       height: 0;
     }
     // 结束状态
-    .sort-enter-to{
+    .sort-enter-to {
       height: 461px;
     }
-    .sort-enter-active{
-      transition: all .5s linear;
+    .sort-enter-active {
+      transition: all 0.5s linear;
     }
   }
 }

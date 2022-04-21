@@ -44,6 +44,7 @@
               <img src="./images/floor-1-1.png" />
             </div>
             <div class="floorBanner">
+              <!-- 轮播图 -->
               <div class="swiper-container" id="floor1Swiper">
                 <div class="swiper-wrapper">
                   <div class="swiper-slide">

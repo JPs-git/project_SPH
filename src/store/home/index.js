@@ -1,3 +1,4 @@
+// 引入api
 import { reqCategoryList,reqGetBannerList} from "@/api"
 // home模块的数据
 // action 处理异步和逻辑
