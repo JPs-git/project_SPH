@@ -143,36 +143,50 @@ export default {
   components: {
     SearchSelector,
   },
+  data() {
+    return {
+      // 发送Ajax请求时的默认参数对象
+      params: {
+        keyword: '',
+        categoryName: '',
+        category1Id: '',
+        category2Id: '',
+        category3Id: '',
+        order: 1, // 排序方式 1: 综合,2: 价格 asc: 升序,desc: 降序  默认综合
+        pageNo: 1, // 初始页码
+        pageSize: 10, // 每页数量，默认10
+        props: [], // 商品属性的数组
+        trademark: '', // 品牌
+      },
+    }
+  },
   methods: {
     // 发送ajax请求，获取搜索信息
     getSearchInfo() {
       this.$store.dispatch('getSearchInfo', this.params)
     },
+    // 配置请求参数对象
+    setParams() {
+      // 为Ajax请求参数对象赋值, 使用es6语法Object.assign
+      Object.assign(this.params, this.$route.params, this.$route.query)
+    },
   },
   computed: {
-    params() {
-      let par = {}
-      par.keyword = this.$route.params.keyword
-      par.categoryName = this.$route.query.k
-      par.category1Id = this.$route.query.category1id
-      par.category2Id = this.$route.query.category2id
-      par.category3Id = this.$route.query.category3id
-      par.order = 1 // 排序方式 1: 综合,2: 价格 asc: 升序,desc: 降序  默认综合
-      par.pageNo = 1 // 初始页码
-      par.pageSize = 10 // 每页数量，默认10
-      return par
-    },
-    ...mapState({
-      searchInfo: (state) => state.search.searchInfo,
-    }),
+    // 映射仓库中的数据到组件
     ...mapGetters(['goodsList', 'trademarkList', 'attrsList']),
   },
   watch: {
     // 路由发生变化时的回调
     $route() {
+      // 更新参数
+      this.setParams()
       // 重新发送Ajax请求
       this.getSearchInfo()
     },
+  },
+  beforeMount() {
+    // 挂载前配置请求参数
+    this.setParams()
   },
   mounted() {
     this.getSearchInfo()

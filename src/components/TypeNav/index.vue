@@ -107,13 +107,13 @@ export default {
         // 判断标签是一级、二级还是三级菜单
         if (category1id) {
           // 一级菜单
-          location.query = { category1id }
+          location.query = { category1Id: category1id }
         } else if (category2id) {
           // 二级菜单
-          location.query = { category2id }
+          location.query = { category2Id: category2id }
         } else if (category3id) {
           // 三级菜单
-          location.query = { category3id }
+          location.query = { category3Id: category3id }
         }
         location.query.k = value
 
