@@ -20,7 +20,7 @@
 
         <!--selector-->
         <!-- 把state中的数据传递给子组件 -->
-        <SearchSelector :searchInfo="searchInfo" />
+        <SearchSelector :trademarkList="trademarkList" :attrsList="attrsList" />
 
         <!--details-->
         <div class="details clearfix">
@@ -55,7 +55,7 @@
               <!-- 单个商品 -->
               <li
                 class="yui3-u-1-5"
-                v-for="(good, index) in searchInfo.goodsList"
+                v-for="(good, index) in goodsList"
                 :key="index"
               >
                 <div class="list-wrap">
@@ -136,7 +136,7 @@
 
 <script>
 import SearchSelector from './SearchSelector/SearchSelector'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'Search',
@@ -165,19 +165,18 @@ export default {
     ...mapState({
       searchInfo: (state) => state.search.searchInfo,
     }),
+    ...mapGetters(['goodsList', 'trademarkList', 'attrsList']),
   },
-  watch:{
+  watch: {
     // 路由发生变化时的回调
-    $route(){
+    $route() {
       // 重新发送Ajax请求
       this.getSearchInfo()
-    }
-    
+    },
   },
   mounted() {
     this.getSearchInfo()
   },
-  
 }
 </script>
 

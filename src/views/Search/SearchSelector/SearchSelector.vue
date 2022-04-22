@@ -6,7 +6,7 @@
       <div class="value logos">
         <ul class="logo-list">
           <li
-            v-for="(trademark, index) in searchInfo.trademarkList"
+            v-for="(trademark, index) in trademarkList"
             :key="index"
           >
             {{ trademark.tmName }}
@@ -21,7 +21,7 @@
     <!-- 其他属性名称 -->
     <div
       class="type-wrap"
-      v-for="(attrs, index) in searchInfo.attrsList"
+      v-for="(attrs, index) in attrsList"
       :key="index"
     >
       <div class="fl key">{{ attrs.attrName }}</div>
@@ -44,7 +44,7 @@
 <script>
 export default {
   name: 'SearchSelector',
-  props:['searchInfo']
+  props:['trademarkList','attrsList']
 }
 </script>
 
